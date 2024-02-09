@@ -1,0 +1,44 @@
+<!-- YourComponent template -->
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name">
+        <span class="input-err" *ngIf="myForm.get('name')?.hasError('required') && myForm.get('name')?.touched">
+            Name is required.
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email">
+        <span class="input-err" *ngIf="myForm.get('email')?.hasError('required') && myForm.get('email')?.touched">
+            Email is required.
+        </span>
+        <span class="input-err" *ngIf="myForm.get('email')?.hasError('email') && myForm.get('email')?.touched">
+            Invalid email address.
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" formControlName="age">
+        <span class="input-err" *ngIf="myForm.get('age')?.hasError('required') && myForm.get('age')?.touched">
+            age is required.
+        </span>
+        <span class="input-err" *ngIf="myForm.get('age')?.hasError('maxlength') && myForm.get('age')?.touched">
+            age must be at less than 99.
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="number" id="phone" formControlName="phone">
+        <span class="input-err" *ngIf="myForm.get('phone')?.hasError('required') && myForm.get('phone')?.touched">
+            Phone number is required.
+        </span>
+    </div>
+
+    <button type="submit" [disabled]="myForm.invalid">{{isEdite? "Save Changes" : "Add User"}}</button>
+    <button (click)="onReset()">Reset</button>
+</form>
